@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DynaCore Design Home">
+    <title>DynaCore UI Design</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--base);
+            overflow: hidden;
+            color: var(--text);
+        }
+
+        /* 设计辅助线和网格 */
+        .design-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .horizontal-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: var(--logic);
+            opacity: 0.15;
+        }
+
+        .vertical-line {
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            background: var(--logic);
+            opacity: 0.15;
+        }
+
+        /* 背景网格 */
+        .background-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(62, 109, 156, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(62, 109, 156, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+        }
+
+        /* 标记点 */
+        .marker-point {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--logic);
+            opacity: 0.3;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 欢迎卡片 - 右侧边栏 */
+        .welcome-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 320px;
+            z-index: 10;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.97);
+            border-left: var(--border-width) solid var(--text);
+            border-top: none;
+            border-right: none;
+            border-bottom: none;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .welcome-card:hover {
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(-5px);
+            transition: all var(--animation);
+        }
+
+        /* 侧边栏内部结构 */
+        .welcome-header {
+            padding: 40px 30px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .welcome-body {
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-footer {
+            padding: 20px 30px 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0 0 15px 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 19%;
+            height: 3px;
+            background: var(--logic);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin: 15px 0 0 0;
+            opacity: 0.85;
+        }
+
+        .welcome-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .welcome-nav {
+            margin-bottom: 30px;
+        }
+
+        .welcome-nav-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            margin-bottom: 15px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all var(--animation);
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 0, 0, 0.03);
+            transform: translateX(3px);
+        }
+
+        .nav-link-icon {
+            margin-right: 10px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* 装饰元素 */
+        .corner-mark {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid var(--text);
+            border-left: 2px solid var(--text);
+            opacity: 0.3;
+        }
+
+        .corner-mark.top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .corner-mark.top-right {
+            top: 20px;
+            right: 20px;
+            transform: rotate(90deg);
+        }
+
+        .corner-mark.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(-90deg);
+        }
+
+        .corner-mark.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(180deg);
+        }
+
+        .guide-line {
+            position: absolute;
+            background: var(--action);
+            opacity: 0.12;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .welcome-container {
+                width: 280px;
+            }
+
+            .welcome-header {
+                padding: 30px 20px 15px;
+            }
+
+            .welcome-body {
+                padding: 20px;
+            }
+
+            .welcome-footer {
+                padding: 15px 20px 30px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-container {
+                width: 100%;
+                position: fixed;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: auto;
+            }
+
+            .welcome-card {
+                flex-direction: row;
+                height: auto;
+                border-left: none;
+                border-top: var(--border-width) solid var(--text);
+            }
+
+            .welcome-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .welcome-header {
+                width: 40%;
+                border-bottom: none;
+                border-right: 1px solid rgba(0, 0, 0, 0.05);
+                padding: 20px 15px;
+            }
+
+            .welcome-body {
+                display: none;
+            }
+
+            .welcome-footer {
+                flex: 1;
+                border-top: none;
+                padding: 20px 15px;
+            }
+
+            .welcome-actions {
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin-top: 10px;
+            }
+
+            .corner-mark.bottom-left,
+            .corner-mark.bottom-right {
+                bottom: 10px;
+            }
+
+            .corner-mark.top-left,
+            .corner-mark.top-right {
+                top: 10px;
+            }
+
+            .corner-mark.top-left,
+            .corner-mark.bottom-left {
+                left: 10px;
+            }
+
+            .corner-mark.top-right,
+            .corner-mark.bottom-right {
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 背景网格 -->
+<div class="background-grid"></div>
+
+<!-- 设计辅助线和网格 -->
+<div class="design-grid">
+    <!-- 水平辅助线 -->
+    <div class="horizontal-line" style="top: 33.33%;"></div>
+    <div class="horizontal-line" style="top: 66.66%;"></div>
+    <div class="horizontal-line" style="top: 50%;"></div>
+
+    <!-- 垂直辅助线 -->
+    <div class="vertical-line" style="left: 33.33%;"></div>
+    <div class="vertical-line" style="left: 66.66%;"></div>
+    <div class="vertical-line" style="left: 50%;"></div>
+
+    <!-- 标记点 -->
+    <div class="marker-point" style="top: 33.33%; left: 33.33%;"></div>
+    <div class="marker-point" style="top: 33.33%; left: 66.66%;"></div>
+    <div class="marker-point" style="top: 66.66%; left: 33.33%;"></div>
+    <div class="marker-point" style="top: 66.66%; left: 66.66%;"></div>
+    <div class="marker-point" style="top: 50%; left: 50%;"></div>
+</div>
+
+<!-- 黄金分割线 -->
+<div class="guide-line" style="height: 1px; width: 61.8%; top: 38.2%; left: 19.1%;"></div>
+<div class="guide-line" style="width: 1px; height: 61.8%; left: 38.2%; top: 19.1%;"></div>
+
+<div class="welcome-container">
+    <div class="welcome-card">
+        <div class="corner-mark top-left"></div>
+        <div class="corner-mark top-right"></div>
+        <div class="corner-mark bottom-left"></div>
+        <div class="corner-mark bottom-right"></div>
+
+        <div class="welcome-header">
+            <h1>DynaCore Design</h1>
+            <p class="subtitle">简约至繁, 打破常规</p>
+        </div>
+
+        <div class="welcome-body">
+            <div class="welcome-nav">
+                <div class="welcome-nav-title">组件导航</div>
+                <div class="nav-links">
+                    <a href="demo/Index.html#design-panel" class="nav-link">
+                        <span class="nav-link-icon">⬡</span>设计规范
+                    </a>
+                    <a href="demo/Index.html#layout-panel" class="nav-link">
+                        <span class="nav-link-icon">⬢</span>布局组件
+                    </a>
+                    <a href="demo/Index.html#form-panel" class="nav-link">
+                        <span class="nav-link-icon">⬒</span>表单控件
+                    </a>
+                    <a href="demo/Index.html#feedback-panel" class="nav-link">
+                        <span class="nav-link-icon">⬓</span>反馈组件
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="welcome-footer">
+            <div class="welcome-actions">
+                <a href="demo/Index.html#design-panel" class="dyna-btn logic">浏览样式</a>
+                <a href="https://github.com/FireworkRocket/DynaCore-UI" class="dyna-btn data">GitHub</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 元素引用
+        const card = document.querySelector('.welcome-card');
+        const header = document.querySelector('.welcome-header');
+        const body = document.querySelector('.welcome-body');
+        const footer = document.querySelector('.welcome-footer');
+        const horizontalLines = document.querySelectorAll('.horizontal-line');
+        const verticalLines = document.querySelectorAll('.vertical-line');
+        const guideLines = document.querySelectorAll('.guide-line');
+        const markerPoints = document.querySelectorAll('.marker-point');
+        const cornerMarks = document.querySelectorAll('.corner-mark');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // 调整网格以适应侧边栏
+        function adjustGridForSidebar() {
+            const sidebarWidth = 320; // 侧边栏宽度
+            const windowWidth = window.innerWidth;
+            const contentWidth = windowWidth - sidebarWidth;
+
+            // 只有在桌面视图时才调整
+            if (windowWidth > 480) {
+                // 重新计算三等分点位置
+                const leftThird = (contentWidth / 3) / windowWidth * 100;
+                const center = (contentWidth / 2) / windowWidth * 100;
+                const rightThird = (contentWidth * 2 / 3) / windowWidth * 100;
+
+                // 调整垂直辅助线
+                verticalLines[0].style.left = leftThird + '%';
+                verticalLines[1].style.left = rightThird + '%';
+                verticalLines[2].style.left = center + '%';
+
+                // 调整标记点
+                markerPoints[0].style.left = leftThird + '%';  // 左上
+                markerPoints[1].style.left = rightThird + '%'; // 右上
+                markerPoints[2].style.left = leftThird + '%';  // 左下
+                markerPoints[3].style.left = rightThird + '%'; // 右下
+                markerPoints[4].style.left = center + '%';     // 中心
+
+                // 调整黄金分割线位置
+                const goldenRatio = 0.618;
+                const goldenLeft = (contentWidth * (1 - goldenRatio)) / windowWidth * 100;
+
+                guideLines[0].style.width = (contentWidth * goldenRatio) / windowWidth * 100 + '%';
+                guideLines[0].style.left = goldenLeft + '%';
+
+                guideLines[1].style.left = (contentWidth * (1 - goldenRatio) / 2) / windowWidth * 100 + '%';
+            }
+        }
+
+        // 初始状态
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(20px)'; // 从右向左进入
+
+        // 内部元素初始状态
+        header.style.opacity = '0';
+        body.style.opacity = '0';
+        footer.style.opacity = '0';
+
+        navLinks.forEach(link => {
+            link.style.opacity = '0';
+            link.style.transform = 'translateX(10px)';
+        });
+
+        horizontalLines.forEach(line => {
+            line.style.opacity = '0';
+            line.style.transform = 'scaleX(0.8)';
+        });
+
+        verticalLines.forEach(line => {
+            line.style.opacity = '0';
+            line.style.transform = 'scaleY(0.8)';
+        });
+
+        guideLines.forEach(line => {
+            line.style.opacity = '0';
+        });
+
+        markerPoints.forEach(point => {
+            point.style.opacity = '0';
+            point.style.transform = 'translate(-50%, -50%) scale(0)';
+        });
+
+        cornerMarks.forEach(mark => {
+            mark.style.opacity = '0';
+            mark.style.transform = 'scale(0.5)';
+        });
+
+        // 先调整网格位置，再开始动画
+        adjustGridForSidebar();
+
+        // 动画序列
+        setTimeout(() => {
+            // 辅助线动画
+            horizontalLines.forEach((line, i) => {
+                setTimeout(() => {
+                    line.style.opacity = '0.15';
+                    line.style.transform = 'scaleX(1)';
+                    line.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                }, i * 50);
+            });
+
+            verticalLines.forEach((line, i) => {
+                setTimeout(() => {
+                    line.style.opacity = '0.15';
+                    line.style.transform = 'scaleY(1)';
+                    line.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                }, i * 50);
+            });
+
+            // 标记点动画
+            setTimeout(() => {
+                markerPoints.forEach((point, i) => {
+                    setTimeout(() => {
+                        point.style.opacity = '0.3';
+                        point.style.transform = 'translate(-50%, -50%) scale(1)';
+                        point.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    }, i * 50);
+                });
+            }, 300);
+
+            // 黄金分割线
+            setTimeout(() => {
+                guideLines.forEach((line, i) => {
+                    setTimeout(() => {
+                        line.style.opacity = '0.12';
+                        line.style.transition = 'opacity 0.4s ease';
+                    }, i * 100);
+                });
+            }, 400);
+
+            // 卡片动画
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+                // 内部元素动画
+                setTimeout(() => {
+                    header.style.opacity = '1';
+                    header.style.transition = 'opacity 0.4s ease';
+
+                    setTimeout(() => {
+                        body.style.opacity = '1';
+                        body.style.transition = 'opacity 0.4s ease';
+
+                        // 导航链接依次显示
+                        navLinks.forEach((link, i) => {
+                            setTimeout(() => {
+                                link.style.opacity = '1';
+                                link.style.transform = 'translateX(0)';
+                                link.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            }, i * 50);
+                        });
+
+                        setTimeout(() => {
+                            footer.style.opacity = '1';
+                            footer.style.transition = 'opacity 0.4s ease';
+                        }, 100);
+                    }, 100);
+                }, 100);
+
+                // 角落标记
+                setTimeout(() => {
+                    cornerMarks.forEach((mark, i) => {
+                        setTimeout(() => {
+                            mark.style.opacity = '0.3';
+
+                            // 根据不同位置应用不同的旋转
+                            if (mark.classList.contains('top-left')) {
+                                mark.style.transform = 'rotate(0)';
+                            } else if (mark.classList.contains('top-right')) {
+                                mark.style.transform = 'rotate(90deg)';
+                            } else if (mark.classList.contains('bottom-left')) {
+                                mark.style.transform = 'rotate(-90deg)';
+                            } else if (mark.classList.contains('bottom-right')) {
+                                mark.style.transform = 'rotate(180deg)';
+                            }
+
+                            mark.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        }, i * 50);
+                    });
+                }, 150);
+            }, 700);
+        }, 200);
+
+        // 窗口大小变化时重新调整
+        window.addEventListener('resize', adjustGridForSidebar);
+    });
+</script>
+</body>
+</html>

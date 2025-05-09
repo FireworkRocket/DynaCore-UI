@@ -1,0 +1,353 @@
+/* 表单控件 */
+.dyna-input {
+    width: 100%;
+    margin: var(--spacing-sm) 0;
+    padding: 12px;
+    box-sizing: border-box;
+    border: var(--border-width-sm) solid var(--text);
+    background: var(--base);
+    transition: var(--animation);
+}
+
+.dyna-input:focus {
+    outline: none;
+    border-color: var(--logic);
+    box-shadow: 0 0 0 2px rgba(62,109,156,0.2);
+}
+
+.dyna-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%231A1E24' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+
+.dyna-checkbox {
+    display: none;
+}
+
+.dyna-checkbox + label {
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 24px;
+}
+
+.dyna-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: var(--border-width-sm) solid var(--text);
+    background: var(--base);
+    transition: var(--animation);
+}
+
+.dyna-checkbox:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: var(--logic);
+    transition: var(--animation);
+}
+
+.dyna-radio {
+    display: none;
+}
+
+.dyna-radio + label {
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 24px;
+}
+
+.dyna-radio + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: var(--border-width-sm) solid var(--text);
+    border-radius: 50%;
+    background: var(--base);
+    transition: var(--animation);
+}
+
+.dyna-radio:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--logic);
+    transition: var(--animation);
+}
+
+/* 按钮 */
+.dyna-btn {
+    border: var(--border-width-sm) solid var(--text);
+    background: var(--base);
+    padding: 10px 20px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--animation);
+    z-index: 1;
+}
+
+.dyna-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: var(--text);
+    transition: height var(--animation);
+    z-index: -1;
+}
+
+.dyna-btn:hover {
+    color: white;
+}
+
+.dyna-btn:hover::after {
+    height: 100%;
+}
+
+.dyna-btn.logic {
+    border-color: var(--logic);
+}
+
+.dyna-btn.logic::after {
+    background: var(--logic);
+}
+
+.dyna-btn.data {
+    border-color: var(--data);
+}
+
+.dyna-btn.data::after {
+    background: var(--data);
+}
+
+.dyna-btn.action {
+    border-color: var(--action);
+}
+
+.dyna-btn.action::after {
+    background: var(--action);
+}
+
+/* 点击动画 */
+.dyna-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px var(--text) inset;
+    transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dyna-btn.logic:active {
+    background-color: #1a4e7e;
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px var(--logic) inset;
+}
+
+.dyna-btn.data:active {
+    background-color: #2a8c5d;
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px var(--data) inset;
+}
+
+.dyna-btn.action:active {
+    background-color: #b65f1f;
+    box-shadow: 0 0 0 2px white inset, 0 0 0 4px var(--action) inset;
+}
+
+.dyna-btn:active::after {
+    opacity: 0.2;
+}
+
+/* 确保按钮有正确的定位属性 */
+.dyna-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 文本区域 */
+.dyna-textarea {
+    width: 100%;
+    padding: 12px;
+    min-height: 120px;
+    border: var(--border-width-sm) solid var(--text);
+    background: var(--base);
+    resize: vertical;
+    transition: var(--animation);
+    box-sizing: border-box;
+}
+
+.dyna-textarea:focus {
+    outline: none;
+    border-color: var(--logic);
+    box-shadow: 0 0 0 2px rgba(62,109,156,0.2);
+}
+
+/* 范围滑块 */
+.dyna-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--depth);
+    outline: none;
+    margin: var(--spacing-md) 0;
+    box-sizing: border-box;
+}
+
+.dyna-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--base);
+    border: var(--border-width-sm) solid var(--text);
+    cursor: pointer;
+    transition: var(--animation);
+}
+
+.dyna-range::-webkit-slider-thumb:hover {
+    background: var(--logic);
+    border-color: var(--logic);
+}
+
+.dyna-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.dyna-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dyna-switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--depth);
+    transition: var(--animation);
+    border: var(--border-width-sm) solid var(--text);
+}
+
+.dyna-switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    background-color: var(--base);
+    border: var(--border-width-sm) solid var(--text);
+    transition: var(--animation);
+}
+
+.dyna-switch input:checked + .dyna-switch-slider {
+    background-color: var(--logic);
+    border-color: var(--logic);
+}
+
+.dyna-switch input:checked + .dyna-switch-slider:before {
+    transform: translateX(24px);
+    background-color: white;
+    border-color: var(--logic);
+}
+
+/* 文件上传 */
+.dyna-file {
+    position: relative;
+    display: inline-block;
+}
+
+.dyna-file input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.dyna-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    border: var(--border-width-sm) solid var(--text);
+    background: var(--base);
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.dyna-file-label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: var(--data);
+    transition: height var(--animation);
+    z-index: -1;
+}
+
+.dyna-file:hover .dyna-file-label {
+    color: white;
+}
+
+.dyna-file:hover .dyna-file-label::after {
+    height: 100%;
+}
+
+/* 输入组 */
+.dyna-input-group {
+    display: flex;
+    margin: 15px 0;
+}
+
+.dyna-input-group .dyna-input {
+    flex: 1;
+    margin: 0;
+}
+
+.dyna-input-group .dyna-btn {
+    margin: 0;
+    border-left: none;
+}
+
+/* 表单组 */
+.dyna-form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.dyna-form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}

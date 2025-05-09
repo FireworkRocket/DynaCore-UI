@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DynaCore UI Design">
+    <title>DynaCore UI Design</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        /* 字体定义 */
+        @font-face {
+            font-family: 'GenryuSansCJK';
+            src: url('GenryuSansCJK-Bold.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* 基础样式 */
+        body {
+            font-family: 'GenryuSansCJK', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        /* 容器系统 */
+        .dyna--container {
+            display: flex;
+            overflow-x: hidden;
+            width: 100vw;
+            height: calc(100vh - 70px);
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+        }
+
+        /* 面板通用样式 */
+        .dyna--panel {
+            flex: 0 0 100%;
+            width: 100%;
+            min-width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            scroll-snap-align: start;
+            padding: 40px;
+            padding-bottom: 50px;
+            box-sizing: border-box;
+            position: relative;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 组件示例通用样式 */
+        .dyna-example-row {
+            margin: 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--depth);
+        }
+
+        .dyna-example-title {
+            font-size: 1em;
+            color: var(--logic);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .dyna-component-desc {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        /* 颜色调色板 */
+        .dyna-color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .dyna-color-item {
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        /* 按钮组容器 */
+        .button-group-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .grid-demo-cell:hover span {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Flex布局 */
+        .flex-demo-container {
+            background: rgba(255,255,255,0.8);
+            border: var(--border-width-sm) solid var(--text);
+            padding: 20px;
+            transition: var(--animation);
+        }
+
+        .flex-demo-container:hover {
+            box-shadow: 6px 6px 0 -3px var(--text);
+            transform: translate(-3px, -3px);
+        }
+
+        .flex-demo-item {
+            padding: 15px;
+            border: var(--border-width-sm) solid var(--text);
+            text-align: center;
+            transition: var(--animation);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .flex-demo-item::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            z-index: -1;
+            transition: height var(--animation);
+        }
+
+        .flex-demo-item:nth-child(1)::after {
+            background: var(--logic);
+        }
+
+        .flex-demo-item:nth-child(2)::after {
+            background: var(--data);
+        }
+
+        .flex-demo-item:nth-child(3)::after {
+            background: var(--action);
+        }
+
+        .flex-demo-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .flex-demo-item:hover::after {
+            height: 100%;
+        }
+
+        .flex-demo-item:hover span {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .task-list-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+
+            transition: var(--animation);
+        }
+
+        .task-checkbox-wrapper {
+            margin-right: 15px;
+            min-width: 24px;
+        }
+
+        .dyna-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .task-item.completed .task-content {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+<!-- 主容器 -->
+<div class="dyna--container" id="container">
+    <!-- 设计面板 -->
+    <section class="dyna--panel" id="design-panel" aria-label="设计示例面板">
+        <article class="dyna-data-core">
+            <h1>DynaCore UI</h1>
+            <p>全新，简洁的UI/UX风格</p>
+            <div class="dyna-divider"></div>
+        </article>
+
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">设计</div>
+            <h2>色彩</h2>
+            <p class="dyna-component-desc">使用色彩可以让您的网站焕然一新</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-color-palette">
+                <div class="dyna-color-item" style="background:var(--text)">--text</div>
+                <div class="dyna-color-item" style="background:var(--logic)">--logic</div>
+                <div class="dyna-color-item" style="background:var(--data)">--data</div>
+                <div class="dyna-color-item" style="background:var(--action)">--action</div>
+            </div>
+        </article>
+    </section>
+
+    <!-- 布局面板 -->
+    <section class="dyna--panel" id="layout-panel" aria-label="布局示例面板">
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">布局</div>
+            <h2>布局示例</h2>
+            <p class="dyna-component-desc">栅格和容器示例，支持响应式布局和组合式设计。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">基础容器</h3>
+                <div class="dyna-container" style="border:1px dashed var(--depth); padding:15px;">
+                    <p>dyna-container: 固定宽度居中容器（最大宽度1200px）</p>
+                </div>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">Flex布局</h3>
+                <div class="dyna-flex dyna-justify-between flex-demo-container">
+                    <div class="flex-demo-item"><span>项目 1</span></div>
+                    <div class="flex-demo-item"><span>项目 2</span></div>
+                    <div class="flex-demo-item"><span>项目 3</span></div>
+                </div>
+                <div class="dyna-code logic" style="margin-top: 15px;">
+                    .dyna-flex { display: flex; }
+                    .dyna-justify-between { justify-content: space-between; }
+                </div>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">现代自适应网格布局</h3>
+                <p class="dyna-component-desc">比传统12列栅格更灵活的现代CSS Grid布局，自动适应容器宽度</p>
+                <div class="function-dyna">
+                    <div class="dyna-cell"><span>网格项目1</span></div>
+                    <div class="dyna-cell"><span>网格项目2</span></div>
+                    <div class="dyna-cell"><span>网格项目3</span></div>
+                    <div class="dyna-cell"><span>网格项目4</span></div>
+                    <div class="dyna-cell"><span>网格项目5</span></div>
+                    <div class="dyna-cell"><span>网格项目6</span></div>
+                </div>
+                <div class="dyna-code logic" style="margin-top: 15px;">
+                    .function-dyna {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                    gap: var(--spacing-sm);
+                    }
+                </div>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">数据核心布局</h3>
+                <p class="dyna-component-desc">带有悬停效果的高交互性布局元素</p>
+                <div class="dyna-data-core" style="margin: 0;">
+                    <h4>数据核心布局示例</h4>
+                    <p>将鼠标悬停在此处查看交互效果</p>
+                    <p>这种布局比传统布局更具视觉吸引力和交互感</p>
+                </div>
+                <div class="dyna-code logic" style="margin-top: 15px;">
+                    .dyna-data-core:hover {
+                    box-shadow: 8px 8px 0 -4px var(--text);
+                    transform: translate(-4px, -4px);
+                    }
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- 表单面板 -->
+    <section class="dyna--panel" id="form-panel" aria-label="表单组件面板">
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">按钮</div>
+            <h2>按钮组件</h2>
+            <p class="dyna-component-desc">支持多种风格和状态的按钮，简洁而富有交互感。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">基础按钮</h3>
+                <div id="buttonContainer" class="button-group-container">
+                    <button class="dyna-btn">默认按钮</button>
+                    <button class="dyna-btn logic">逻辑按钮</button>
+                    <button class="dyna-btn data">数据按钮</button>
+                    <button class="dyna-btn action">操作按钮</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">输入</div>
+            <h2>输入控件</h2>
+            <p class="dyna-component-desc">提供各种类型的用户输入控件，支持多种交互方式。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">文本输入</h3>
+                <input type="text" class="dyna-input" placeholder="基础文本输入框">
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">下拉选择</h3>
+                <select class="dyna-input dyna-select" id="demo-select">
+                    <option value="">请选择一个选项</option>
+                </select>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">文本区域</h3>
+                <textarea class="dyna-textarea" placeholder="多行文本输入区域"></textarea>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">任务列表</h3>
+                <div id="taskList"></div>
+                <div class="dyna-input-group">
+                    <input type="text" id="newTaskInput" class="dyna-input" placeholder="添加新任务...">
+                    <button id="addTaskBtn" class="dyna-btn action">添加</button>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- 导航面板 -->
+    <section class="dyna--panel" id="navigation-panel" aria-label="导航组件面板">
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">标签页</div>
+            <h2>标签页组件</h2>
+            <p class="dyna-component-desc">提供直观的标签式内容切换组件。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-tabs" role="tablist">
+                <div class="dyna-tab active" role="tab" aria-selected="true">标签一</div>
+                <div class="dyna-tab" role="tab" aria-selected="false">标签二</div>
+                <div class="dyna-tab" role="tab" aria-selected="false">标签三</div>
+            </div>
+            <div class="dyna-tab-content active" role="tabpanel">
+                <p>这是第一个标签页的内容。dyna UI提供了完整的标签页实现，支持各种互动效果。</p>
+            </div>
+            <div class="dyna-tab-content" role="tabpanel" hidden>
+                <p>这是第二个标签页的内容。您可以轻松切换不同的标签查看不同内容。</p>
+            </div>
+            <div class="dyna-tab-content" role="tabpanel" hidden>
+                <p>这是第三个标签页的内容。标签页适合需要在有限空间内展示多组内容的场景。</p>
+            </div>
+        </article>
+
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">导航</div>
+            <h2>导航组件</h2>
+            <p class="dyna-component-desc">提供多种导航控件，支持网站各种导航需求。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">导航菜单</h3>
+                <div id="navItems" class="dyna-panel" role="navigation"></div>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">面包屑</h3>
+                <nav class="dyna-breadcrumbs" aria-label="面包屑导航">
+                    <div class="dyna-breadcrumb-item"><a href="#">首页</a></div>
+                    <div class="dyna-breadcrumb-item"><a href="#">组件</a></div>
+                    <div class="dyna-breadcrumb-item">导航</div>
+                </nav>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">分页</h3>
+                <nav class="dyna-pagination" aria-label="分页导航">
+                    <div class="dyna-pagination-item">
+                        <a href="#" class="dyna-pagination-link" aria-label="上一页">«</a>
+                    </div>
+                    <div class="dyna-pagination-item">
+                        <a href="#" class="dyna-pagination-link active" aria-current="page">1</a>
+                    </div>
+                    <div class="dyna-pagination-item">
+                        <a href="#" class="dyna-pagination-link">2</a>
+                    </div>
+                    <div class="dyna-pagination-item">
+                        <a href="#" class="dyna-pagination-link">3</a>
+                    </div>
+                    <div class="dyna-pagination-item">
+                        <a href="#" class="dyna-pagination-link" aria-label="下一页">»</a>
+                    </div>
+                </nav>
+            </div>
+        </article>
+    </section>
+
+    <!-- 内容面板 -->
+    <section class="dyna--panel" id="content-panel" aria-label="内容组件面板">
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">卡片</div>
+            <h2>卡片组件</h2>
+            <p class="dyna-component-desc">用于内容展示的卡片组件，支持多种布局和风格。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-row">
+                <div class="dyna-col dyna-col-6">
+                    <article class="dyna-card">
+                        <header class="dyna-card-header">
+                            <h3 class="dyna-card-title">卡片标题</h3>
+                        </header>
+                        <div class="dyna-card-body">
+                            <p>微软（Microsoft）是一家美国跨国科技企业，1975年4月4日创立。2023财年营收2119.15亿美元，
+                                最为著名和畅销的产品为Windows操作系统和Office系列软件。</p>
+                        </div>
+                        <footer class="dyna-card-footer">
+                            <button class="dyna-btn">查看详情</button>
+                        </footer>
+                    </article>
+                </div>
+                <div class="dyna-col dyna-col-6">
+                    <article class="dyna-card">
+                        <header class="dyna-card-header">
+                            <h3 class="dyna-card-title">数据卡片</h3>
+                        </header>
+                        <div class="dyna-card-body">
+                            <p>卡片组件可用于展示数据、文章摘要或操作组。</p>
+                            <div class="dyna-progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <div class="dyna-progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <footer class="dyna-card-footer">
+                            <button class="dyna-btn data">查看数据</button>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </article>
+
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">折叠</div>
+            <h2>折叠面板</h2>
+            <p class="dyna-component-desc">可折叠内容面板，节省空间同时保持内容组织结构。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-accordion">
+                <h3 class="dyna-accordion-header" role="button" aria-expanded="false" aria-controls="accordion-1">第一项内容</h3>
+                <div class="dyna-accordion-body" id="accordion-1" hidden>
+                    <p>这是第一项的详细内容。折叠面板适合FAQ、分类内容等场景。</p>
+                </div>
+            </div>
+            <div class="dyna-accordion active">
+                <h3 class="dyna-accordion-header" role="button" aria-expanded="true" aria-controls="accordion-2">第二项内容</h3>
+                <div class="dyna-accordion-body" id="accordion-2">
+                    <p>这是第二项的详细内容。点击标题可以展开或折叠内容。</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- 反馈面板 -->
+    <section class="dyna--panel" id="feedback-panel" aria-label="反馈组件面板">
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">加载</div>
+            <h2>加载与步骤</h2>
+            <p class="dyna-component-desc">用于展示加载状态和流程进度的组件。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">步骤条</h3>
+                <div class="dyna-stepper" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3">
+                    <div class="dyna-step active">
+                        <div class="dyna-step-circle">1</div>
+                        <div>第一步</div>
+                    </div>
+                    <div class="dyna-step">
+                        <div class="dyna-step-circle">2</div>
+                        <div>第二步</div>
+                    </div>
+                    <div class="dyna-step">
+                        <div class="dyna-step-circle">3</div>
+                        <div>第三步</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">进度条</h3>
+                <div class="dyna-progress" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                    <div class="dyna-progress-bar" style="width: 50%"></div>
+                </div>
+            </div>
+        </article>
+
+        <article class="dyna-data-core dyna-demo-section">
+            <div class="dyna-code-tag">通知</div>
+            <h2>通知组件</h2>
+            <p class="dyna-component-desc">用于展示临时性通知和提醒的组件。</p>
+            <div class="dyna-divider"></div>
+
+            <div class="dyna-example-row">
+                <h3 class="dyna-example-title">轻提示（Toast）</h3>
+                <div style="position:relative; border:1px dashed var(--depth); padding:15px; height:100px;">
+                    <div style="position:absolute; bottom:10px; right:10px;">
+                        <div class="dyna-toast info" style="animation:none; opacity:1;" role="alert">
+                            这是一条信息提示
+                        </div>
+                    </div>
+                </div>
+                <div class="button-group-container">
+                    <button class="dyna-btn logic" id="showInfoToast">显示信息提示</button>
+                    <button class="dyna-btn data" id="showSuccessToast">显示成功提示</button>
+                    <button class="dyna-btn action" id="showWarningToast">显示警告提示</button>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>
+
+<!-- 底部导航 -->
+<nav class="dyna-bottom-nav" aria-label="主导航">
+    <div class="dyna-bottom-nav-item active" data-panel="design-panel" role="button" tabindex="0">设计</div>
+    <div class="dyna-bottom-nav-item" data-panel="layout-panel" role="button" tabindex="0">布局</div>
+    <div class="dyna-bottom-nav-item" data-panel="form-panel" role="button" tabindex="0">表单</div>
+    <div class="dyna-bottom-nav-item" data-panel="navigation-panel" role="button" tabindex="0">导航</div>
+    <div class="dyna-bottom-nav-item" data-panel="content-panel" role="button" tabindex="0">内容</div>
+    <div class="dyna-bottom-nav-item" data-panel="feedback-panel" role="button" tabindex="0">反馈</div>
+</nav>
+
+<!-- Toast 容器 -->
+<div class="dyna-toast-container" aria-live="polite"></div>
+
+<!-- 对话框 -->
+<div id="demoModal" class="dyna-modal-backdrop" style="display:none;" aria-hidden="true">
+    <div class="dyna-modal" role="dialog" aria-labelledby="modalTitle">
+        <header class="dyna-modal-header">
+            <h3 id="modalTitle">操作确认</h3>
+            <button class="dyna-modal-close" aria-label="关闭">&times;</button>
+        </header>
+        <div class="dyna-modal-body">
+            <p>您确定要执行此操作吗？此操作不可撤销。</p>
+            <div class="dyna-alert info" role="alert">
+                <span>请在执行前确认您的操作内容。</span>
+            </div>
+        </div>
+        <footer class="dyna-modal-footer">
+            <button class="dyna-btn" id="cancelModal">取消</button>
+            <button class="dyna-btn action" id="confirmModal">确认</button>
+        </footer>
+    </div>
+</div>
+
+<script src="../js/dyna.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

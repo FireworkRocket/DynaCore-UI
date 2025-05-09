@@ -1,0 +1,29 @@
+:root {
+    /* 颜色系统 */
+    --base: #F5F7FA;
+    --text: #1A1E24;
+    --logic: #3E6D9C;
+    --data: #4CAF82;
+    --action: #D67F3A;
+    --depth: rgba(27,31,35,0.08);
+    
+    /* 网格背景 */
+    --grid: repeating-linear-gradient(
+            transparent 0 24px,
+            var(--depth) 24px 25px
+    );
+
+    /* 间距 */
+    --spacing-xs: 6px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    
+    /* 边框 */
+    --border-width: 3px;
+    --border-width-sm: 2px;
+    
+    /* 动画 */
+    --animation: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --animation-slow: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}

@@ -1,0 +1,95 @@
+/* 加载指示器 */
+.dyna-loader {
+    /*coming soon*/
+}
+
+/* 步骤条 */
+.dyna-stepper {
+    display: flex;
+    margin: var(--spacing-md) 0;
+}
+
+.dyna-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.dyna-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    width: 100%;
+    height: var(--border-width-sm);
+    background: var(--depth);
+    z-index: 1;
+}
+
+.dyna-step-circle {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--border-width-sm) solid var(--text);
+    background: var(--base);
+    margin: 0 auto var(--spacing-xs);
+    position: relative;
+    z-index: 2;
+}
+
+.dyna-step.active .dyna-step-circle {
+    background: var(--logic);
+    color: white;
+    border-color: var(--logic);
+}
+
+.dyna-step.completed .dyna-step-circle {
+    background: var(--data);
+    color: white;
+    border-color: var(--data);
+}
+
+.dyna-step.completed:not(:last-child)::after {
+    background: var(--data);
+}
+
+/* 轻提示 */
+.dyna-toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.dyna-toast {
+    min-width: 250px;
+    margin-top: 10px;
+    padding: 15px;
+    background: var(--text);
+    color: white;
+    border-left: 4px solid var(--text);
+    animation: dyna-slide-in 0.3s, dyna-fade-out 0.5s 2.5s forwards;
+}
+
+.dyna-toast.info {
+    border-left-color: var(--logic);
+}
+
+.dyna-toast.success {
+    border-left-color: var(--data);
+}
+
+.dyna-toast.warning {
+    border-left-color: var(--action);
+}
+
+@keyframes dyna-slide-in {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes dyna-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

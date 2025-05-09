@@ -1,0 +1,78 @@
+/* 容器 */
+.dyna-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.dyna-container-fluid {
+    width: 100%;
+    padding: 0 var(--spacing-md);
+}
+
+/* 行与列 */
+.dyna-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.dyna-col {
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.dyna-col-1 { width: 8.33%; }
+.dyna-col-2 { width: 16.66%; }
+.dyna-col-3 { width: 25%; }
+.dyna-col-4 { width: 33.33%; }
+.dyna-col-5 { width: 41.66%; }
+.dyna-col-6 { width: 50%; }
+.dyna-col-7 { width: 58.33%; }
+.dyna-col-8 { width: 66.66%; }
+.dyna-col-9 { width: 75%; }
+.dyna-col-10 { width: 83.33%; }
+.dyna-col-11 { width: 91.66%; }
+.dyna-col-12 { width: 100%; }
+
+/* 灵活布局工具 */
+.dyna-flex {
+    display: flex;
+}
+
+.dyna-flex-column {
+    flex-direction: column;
+}
+
+.dyna-flex-wrap {
+    flex-wrap: wrap;
+}
+
+.dyna-justify-start { justify-content: flex-start; }
+.dyna-justify-end { justify-content: flex-end; }
+.dyna-justify-center { justify-content: center; }
+.dyna-justify-between { justify-content: space-between; }
+.dyna-justify-around { justify-content: space-around; }
+
+.dyna-align-start { align-items: flex-start; }
+.dyna-align-end { align-items: flex-end; }
+.dyna-align-center { align-items: center; }
+.dyna-align-stretch { align-items: stretch; }
+
+/* 间距工具 */
+.dyna-m-0 { margin: 0; }
+.dyna-mt-xs { margin-top: var(--spacing-xs); }
+.dyna-mt-sm { margin-top: var(--spacing-sm); }
+.dyna-mt-md { margin-top: var(--spacing-md); }
+.dyna-mt-lg { margin-top: var(--spacing-lg); }
+.dyna-mb-xs { margin-bottom: var(--spacing-xs); }
+.dyna-mb-sm { margin-bottom: var(--spacing-sm); }
+.dyna-mb-md { margin-bottom: var(--spacing-md); }
+.dyna-mb-lg { margin-bottom: var(--spacing-lg); }
+
+.dyna-p-0 { padding: 0; }
+.dyna-p-xs { padding: var(--spacing-xs); }
+.dyna-p-sm { padding: var(--spacing-sm); }
+.dyna-p-md { padding: var(--spacing-md); }
+.dyna-p-lg { padding: var(--spacing-lg); }

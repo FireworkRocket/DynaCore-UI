@@ -1,0 +1,127 @@
+{
+  "app": {
+    "title": "DynaCore UI Design",
+    "description": "简洁、高效的UI设计系统"
+  },
+  "nav": {
+    "title": "DynaCore UI",
+    "items": ["设计规范", "布局组件", "基础控件", "表单元素", "数据展示", "交互组件", "反馈提示"],
+    "docs": "开发文档"
+  },
+  "sections": {
+    "intro": {
+      "title": "DynaCore UI",
+      "description": "简洁、高效的UI设计系统"
+    },
+    "colors": {
+      "title": "色彩",
+      "description": "统一的色彩系统，赋予界面视觉层次和意义"
+    },
+    "buttons": {
+      "title": "按钮",
+      "description": "用于触发操作的交互元素",
+      "types": ["常规按钮", "主要按钮", "成功按钮", "警示按钮"]
+    },
+    "forms": {
+      "title": "表单",
+      "description": "高效直观的数据输入体验",
+      "text_field": "文本框",
+      "select": "下拉选择",
+      "select_placeholder": "请选择选项",
+      "select_options": ["选项一", "选项二", "选项三"],
+      "checkbox": "接受用户协议",
+      "radio": ["标准版", "高级版"]
+    },
+    "tags": {
+      "title": "标签与进度条",
+      "description": "展示状态和分类信息",
+      "types": ["默认", "主要", "成功", "警告"],
+      "progress": "进度"
+    },
+    "tables": {
+      "title": "数据表格",
+      "description": "结构化展示数据内容",
+      "headers": ["ID", "项目名称", "状态", "操作"],
+      "rows": [
+        {"id": "PRJ-001", "name": "企业门户网站", "status": "进行中", "action": "详情"},
+        {"id": "PRJ-002", "name": "电商平台开发", "status": "已完成", "action": "详情"},
+        {"id": "PRJ-003", "name": "移动应用设计", "status": "暂停", "action": "详情"}
+      ]
+    },
+    "alerts": {
+      "title": "消息提示",
+      "description": "展示系统反馈信息",
+      "info": "信息提示 — 系统将于今晚22:00-23:00进行例行维护，请提前保存您的工作。",
+      "success": "成功提示 — 您的项目已成功创建，现在可以添加团队成员了。",
+      "warning": "警告提示 — 您的存储空间即将用尽，请及时清理或升级套餐。"
+    },
+    "code": {
+      "title": "代码块",
+      "description": "展示格式化代码片段"
+    },
+    "panels": {
+      "title": "卡片/面板",
+      "description": "用于信息分组和展示",
+      "system": {
+        "title": "系统状态",
+        "content": "系统负载: 65%",
+        "action": "查看详情"
+      },
+      "users": {
+        "title": "用户数据",
+        "content": "本月活跃用户增长24%，新注册用户环比增长38%",
+        "action": "查看报告"
+      }
+    },
+    "nav_matrix": {
+      "title": "功能导航",
+      "description": "主要功能入口导航",
+      "items": ["数据导入", "数据分析", "数据可视化", "报表导出", "数据备份", "数据恢复", "智能清理", "权限管理"]
+    },
+    "modal": {
+      "title": "对话框",
+      "description": "需要用户确认或输入的弹出式窗口",
+      "button": "打开对话框",
+      "dialog_title": "确认操作",
+      "content": "您确定要执行此操作吗？此操作无法撤销。",
+      "note": "操作完成后可能需要几分钟时间生效。",
+      "cancel": "取消",
+      "confirm": "确认"
+    },
+    "layout": {
+      "title": "响应式布局",
+      "description": "适应不同设备的灵活布局系统",
+      "two_columns": "双栏布局",
+      "three_columns": "三栏布局",
+      "main": {
+        "title": "主要内容",
+        "content": "核心内容展示区域"
+      },
+      "side": {
+        "title": "辅助内容",
+        "content": "次要内容和相关信息"
+      },
+      "nav": {
+        "title": "导航区域",
+        "content": "页面导航和功能入口"
+      },
+      "info": {
+        "title": "信息面板",
+        "content": "辅助信息和状态展示"
+      }
+    },
+    "tasks": {
+      "title": "任务管理组件",
+      "description": "用于跟踪和管理任务",
+      "list_title": "项目任务列表",
+      "items": [
+        {"text": "完成产品需求文档", "status": "进行中"},
+        {"text": "设计系统架构方案", "status": "已完成"},
+        {"text": "优化用户界面交互", "status": "待处理"}
+      ],
+      "input_placeholder": "输入新任务...",
+      "add_button": "添加",
+      "new_task": "新任务"
+    }
+  }
+}

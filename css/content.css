@@ -1,0 +1,192 @@
+/* 卡片 */
+.dyna-card {
+    background: rgba(255,255,255,0.95);
+    border: var(--border-width) solid var(--text);
+    padding: 20px;
+    margin-bottom: var(--spacing-md);
+    transition: var(--animation);
+}
+
+.dyna-card:hover {
+    box-shadow: 8px 8px 0 -4px var(--text);
+    transform: translate(-4px, -4px);
+}
+
+.dyna-card-header {
+    border-bottom: var(--border-width-sm) solid var(--depth);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+}
+
+.dyna-card-title {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.dyna-card-body {
+    margin-bottom: var(--spacing-md);
+}
+
+.dyna-card-footer {
+    border-top: var(--border-width-sm) solid var(--depth);
+    padding-top: var(--spacing-sm);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 折叠面板 */
+.dyna-accordion {
+    border: var(--border-width-sm) solid var(--text);
+    margin-bottom: var(--spacing-md);
+    overflow: hidden;
+    background: var(--base);
+}
+
+.dyna-accordion-header {
+    padding: 15px 20px;
+    background: var(--base);
+    cursor: pointer;
+    position: relative;
+    transition: var(--animation);
+    user-select: none;
+    font-weight: 500;
+}
+
+.dyna-accordion-header::after {
+    content: "+";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: var(--logic);
+    transition: var(--animation);
+}
+
+.dyna-accordion.active .dyna-accordion-header::after {
+    content: "-";
+    color: white;
+}
+
+.dyna-accordion.active .dyna-accordion-header {
+    background: var(--logic);
+    color: white;
+}
+
+.dyna-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.3s, opacity 0.2s, padding 0.2s;
+    background: var(--base);
+}
+
+.dyna-accordion.active .dyna-accordion-body {
+    max-height: 500px;
+    padding: 15px 20px;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.4s, opacity 0.2s, padding 0.2s;
+}
+
+/* 工具提示 */
+.dyna-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.dyna-tooltip-text {
+    visibility: hidden;
+    background: var(--text);
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 10;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity var(--animation);
+    white-space: nowrap;
+}
+
+.dyna-tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--text) transparent transparent transparent;
+}
+
+.dyna-tooltip:hover .dyna-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 徽章 */
+.dyna-badge {
+    display: inline-block;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    background: var(--text);
+    color: white;
+    font-size: 0.75em;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.dyna-badge.logic {
+    background: var(--logic);
+}
+
+.dyna-badge.data {
+    background: var(--data);
+}
+
+.dyna-badge.action {
+    background: var(--action);
+}
+
+/* 滚动条样式 */
+.dyna-panel::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.dyna-panel::-webkit-scrollbar-track {
+    background: rgba(26, 30, 36, 0.05);
+    border-radius: 0 !important;
+}
+
+.dyna-panel::-webkit-scrollbar-thumb {
+    background: var(--logic);
+    transition: var(--animation);
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    border: none !important;
+}
+
+.dyna-panel::-webkit-scrollbar-thumb:hover {
+    background: var(--text);
+    border-radius: 0 !important;
+}
+
+.dyna-panel::-webkit-scrollbar-corner {
+    border-radius: 0 !important;
+}
+
+/* Firefox滚动条支持 */
+.dyna-panel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--logic) rgba(26, 30, 36, 0.05);
+    -ms-overflow-style: none;
+}

@@ -1,0 +1,188 @@
+.dyna-data-core {
+    background: rgba(255,255,255,0.98);
+    border: var(--border-width) solid var(--text);
+    padding: var(--spacing-md);
+    margin: var(--spacing-md);
+    transition: var(--animation);
+    position: relative;
+}
+
+.dyna-data-core:hover {
+    box-shadow: 8px 8px 0 -4px var(--text);
+    transform: translate(-4px, -4px);
+}
+
+.function-dyna {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-sm);
+    margin: 25px 0;
+}
+
+.dyna-cell {
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    border: var(--border-width-sm) solid var(--text);
+    position: relative;
+    overflow: hidden;
+    background: var(--base);
+    transition: var(--animation);
+}
+
+.dyna-cell::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: var(--logic);
+    transition: height var(--animation);
+    z-index: 0;
+}
+
+.dyna-cell:hover::after {
+    height: 100%;
+}
+
+.dyna-cell span {
+    position: relative;
+    z-index: 1;
+    transition: color var(--animation);
+}
+
+.dyna-cell:hover span {
+    color: white;
+}
+
+.dyna-code-tag {
+    position: absolute;
+    right: calc(-1 * var(--border-width));
+    top: calc(-1 * var(--border-width));
+    padding: 4px 12px;
+    background: var(--text);
+    color: white;
+}
+
+.dyna-code {
+    display: block;
+    background: rgba(76,175,130,0.1);
+    padding: 15px;
+    line-height: 1.6;
+    border-left: 4px solid var(--data);
+}
+
+.dyna-code.logic {
+    background: rgba(62,109,156,0.1);
+    border-left-color: var(--logic);
+}
+
+.dyna-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--text);
+    color: white;
+    font-size: 0.9em;
+    margin-right: 8px;
+}
+
+.dyna-tag.logic {
+    background: var(--logic);
+}
+
+.dyna-tag.data {
+    background: var(--data);
+}
+
+.dyna-tag.action {
+    background: var(--action);
+}
+
+.dyna-panel {
+    border: var(--border-width) solid var(--text);
+    padding: 25px;
+    margin-bottom: var(--spacing-md);
+    background: rgba(255,255,255,0.95);
+}
+
+.dyna-panel-title {
+    font-size: 0.95em;
+    color: var(--logic);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.dyna-progress {
+    height: 12px;
+    width: 100%;
+    background: var(--depth);
+    position: relative;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.dyna-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+            45deg,
+            var(--logic) 0,
+            var(--logic) 15px,
+            rgba(62,109,156,0.8) 15px,
+            rgba(62,109,156,0.8) 30px
+    );
+    transition: width 0.5s;
+}
+
+.dyna-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0;
+}
+
+.dyna-table th {
+    background: var(--text);
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.dyna-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--depth);
+}
+
+.dyna-table tr:hover td {
+    background: rgba(62,109,156,0.05);
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.task-item .dyna-flex.dyna-align-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dyna-checkbox {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--logic);
+    vertical-align: middle;
+}
+
+.task-item .dyna-tag {
+    margin-left: 16px;
+    margin-right: 0;
+}
+
