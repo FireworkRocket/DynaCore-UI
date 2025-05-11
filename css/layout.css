@@ -71,6 +71,18 @@
 .dyna-mb-md { margin-bottom: var(--spacing-md); }
 .dyna-mb-lg { margin-bottom: var(--spacing-lg); }
 
+/* 水平外边距 */
+.dyna-mx-xs { margin-left: var(--spacing-xs); margin-right: var(--spacing-xs); }
+.dyna-mx-sm { margin-left: var(--spacing-sm); margin-right: var(--spacing-sm); }
+.dyna-mx-md { margin-left: var(--spacing-md); margin-right: var(--spacing-md); }
+.dyna-mx-lg { margin-left: var(--spacing-lg); margin-right: var(--spacing-lg); }
+
+/* 垂直外边距 */
+.dyna-my-xs { margin-top: var(--spacing-xs); margin-bottom: var(--spacing-xs); }
+.dyna-my-sm { margin-top: var(--spacing-sm); margin-bottom: var(--spacing-sm); }
+.dyna-my-md { margin-top: var(--spacing-md); margin-bottom: var(--spacing-md); }
+.dyna-my-lg { margin-top: var(--spacing-lg); margin-bottom: var(--spacing-lg); }
+
 .dyna-p-0 { padding: 0; }
 .dyna-p-xs { padding: var(--spacing-xs); }
 .dyna-p-sm { padding: var(--spacing-sm); }

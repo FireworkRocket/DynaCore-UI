@@ -8,11 +8,18 @@
 
     <link rel="stylesheet" href="css/main.css">
     <style>
+        @font-face {
+            font-family: 'GenryuSansCJK';
+            src: url('/demo/GenryuSansCJK-Bold.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'IBM Plex Sans', sans-serif;
             background: var(--base);
+            font-family: 'GenryuSansCJK', sans-serif;
             overflow: hidden;
             color: var(--text);
         }
@@ -221,7 +228,6 @@
             opacity: 0.12;
         }
 
-        /* 响应式设计 */
         @media (max-width: 768px) {
             .welcome-container {
                 width: 280px;
@@ -567,8 +573,6 @@
                             } else if (mark.classList.contains('bottom-right')) {
                                 mark.style.transform = 'rotate(180deg)';
                             }
-
-                            mark.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                         }, i * 50);
                     });
                 }, 150);
