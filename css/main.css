@@ -1,8 +1,8 @@
-@import 'variables.css';
-@import 'base.css';
-@import 'layout.css';
-@import 'navigation.css';
-@import 'components.css';
-@import 'forms.css';
-@import 'feedback.css';
-@import 'content.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/variables.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/base.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/layout.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/navigation.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/components.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/forms.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/feedback.css';
+@import 'https://raw.githubusercontent.com/FireworkRocket/DynaCore-UI/master/css/content.css';
